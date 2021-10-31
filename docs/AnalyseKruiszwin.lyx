@@ -1,0 +1,491 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass scrreprt
+\begin_preamble
+% Any characters can be typed directly from the keyboard, eg éçñ
+% provide lots of new symbols
+% Add graphics capabilities
+%\usepackage{epstopdf} % to include .eps graphics files with pdfLaTeX
+\usepackage{flafter}% Don't place floats before their definition
+%\usepackage{topcapt}   % Define \topcation for placing captions above tables (not in gwTeX)
+%\usepackage{natbib} % use author/date bibliographic citations
+\@ifundefined{definecolor}
+ {\usepackage{color}}{}
+% necessary to use colos
+% Better maths support & more symbols
+\usepackage{bm}% Define \bm{} to use bold math fonts
+\usepackage[pdftex,bookmarks,colorlinks,breaklinks]{hyperref}% PDF hyperlinks, with coloured links
+\definecolor{dullmagenta}{rgb}{0.4,0,0.4}% #660066
+\definecolor{darkblue}{rgb}{0,0,0.4}\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue}% coloured links
+%\hypersetup{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black} % black links, for printed output
+\usepackage{memhfixc}% remove conflict between the memoir class & hyperref
+% \usepackage[activate]{pdfcprot}  % Turn on margin kerning (not in gwTeX)
+\usepackage{pdfsync}% enable tex source and pdf output syncronicity
+\usepackage{hyperref}
+
+\usepackage{alltt}
+\usepackage{color}
+\definecolor{string}{rgb}{0.7,0.0,0.0}
+\definecolor{comment}{rgb}{0.13,0.54,0.13}
+\definecolor{keyword}{rgb}{0.0,0.0,1.0}
+
+\usepackage{listings}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+
+\newtheorem{issue}{Issue}
+
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language dutch
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style polish
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Kruiszwin
+\end_layout
+
+\begin_layout Author
+Theo Olsthoorn
+\end_layout
+
+\begin_layout Date
+4 - 12- 2020
+\end_layout
+
+\begin_layout Section
+Vergelijk ongespannen met gespannen stroming in een aquifer
+\end_layout
+
+\begin_layout Subsection
+Gespannen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+q=nx=-kD\frac{dh}{dx}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+C-\frac{1}{2}\frac{nx^{2}}{kD} & =h\\
+Cx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+randvoorwaarde: 
+\begin_inset Formula $x=b\rightarrow h=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+h=\frac{n}{2kD}\left(L^{2}-x^{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Ongespannen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+q=nx=-kh\frac{dh}{dx}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+C-\frac{nx^{2}}{2k}=\frac{h^{2}}{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+randvoorwaarde 
+\begin_inset Formula $x=b\rightarrow h=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+h^{2} & =\frac{n}{k}\left(L^{2}-x^{2}\right)\\
+h & =\sqrt{\frac{n}{k}\left(L^{2}-x^{2}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De verhouding, we noemen de freatische grondwaterstand 
+\begin_inset Formula $h$
+\end_inset
+
+ en de gespannen versie 
+\begin_inset Formula $\phi$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{h}{\phi} & =\frac{\sqrt{\frac{n}{k}\left(L^{2}-x^{2}\right)}}{\frac{n}{2kD}\left(L^{2}-x^{2}\right)}\\
+\frac{h}{\phi} & =\frac{1}{2D}\sqrt{\frac{k}{n}\frac{1}{L^{2}-x^{2}}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figuur 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Vergelijking-tussen-gespannen"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ vergelijkt het verloop van het freatisch vlak met data van de stijghoogte
+ in gespannen water in een aquifer tussen de waterscheiding op 
+\begin_inset Formula $x=0$
+\end_inset
+
+ en de rand 
+\begin_inset Formula $x=b$
+\end_inset
+
+ waar 
+\begin_inset Formula $h=0$
+\end_inset
+
+ resp.
+ 
+\begin_inset Formula $\phi=0$
+\end_inset
+
+.
+ Dit komt overeen met de gegevens in het doorsnede model van Kruiszwin,
+ waarin het water uiteindelijk over een afstand van ca.
+ 80 van weerszijden naar de sleuf stroomt in de dunne ondiepe freatische
+ zandlaag.
+ Bij de gebruikte doorlatendheid en het gebruikte neerslagoverschot (zie
+ onderschrift van de figuur), kan het neerslagwater worden afgevoerd via
+ een laag met gespannen water met uniforme dikte van 0.4 m, waar de natte
+ dikte op 
+\begin_inset Formula $x=0$
+\end_inset
+
+ in de freatische laag 1 m is, dus 2.5 maal zo groot.
+ Dit impliceert dat bij een verlaging van 1 m in een freatisch pakket van
+ een m dikte veel minder water toestroomt dan bij dezelfde verlaging van
+ 1 m in een laag waarin het doorstroomdikte constant blijft aan de beginwaarde
+ van eveneens 1 m.
+ Omdat we niet beschikken over analytische formules die de afvoer met een
+ freatisch vlak dynamisch beschrijven is dit alleen uit te rekenen met een
+ model.
+ Echter deze stationaire analyse geeft wel een indruk.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename GespanneOngespannen.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vergelijking-tussen-gespannen"
+
+\end_inset
+
+Vergelijking tussen gespannen en ongespannen water in een enkel pakket met
+ stroming vanaf de waterscheiding tot vaste rand op 80 m afstand.
+ 
+\begin_inset Formula $k=5$
+\end_inset
+
+ m/d, 
+\begin_inset Formula $N=0.0005$
+\end_inset
+
+ m/d, 
+\begin_inset Formula $D=0.4$
+\end_inset
+
+ m.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We kunnen bij gelijke dikte op 
+\begin_inset Formula $x=0$
+\end_inset
+
+ berekenen wat de verhouding in de afvoer 
+\begin_inset Formula $N$
+\end_inset
+
+ is voor het freatische en de gespannen laag.
+\end_layout
+
+\begin_layout Standard
+Freatisch:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+h_{1}^{2} & =\frac{N_{1}}{k}b^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Gespannen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+h_{2}=\frac{N_{2}}{2kD}b^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Met 
+\begin_inset Formula $h_{1}=h_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{N_{2}}{2kD}b^{2} & =\sqrt{\frac{N_{1}}{k}b^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+N_{1} & =\frac{k}{b^{2}}h_{1}^{2}\\
+N_{2} & =\frac{2kD}{b^{2}}h_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{N_{1}}{N_{2}}=\frac{1}{2}\frac{h_{1}^{2}}{h_{2}D}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Maar we hebben in deze vergelijking 
+\begin_inset Formula $h_{1}=h_{2}=D$
+\end_inset
+
+ dus
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{N_{1}}{N_{2}}=\frac{1}{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dat is dus exact een overschatting met een factor 2 wanneer we het doorlaatvermo
+gen gelijk houden in plaats van de dikte gelijk aan de natte doorsnede nemen
+ zoals bij het freatisch vlak.
+\end_layout
+
+\begin_layout Standard
+Met ttim vonden we een afvoer na 180 d van ongeveer 38 m
+\begin_inset Formula $^{3}$
+\end_inset
+
+/d.
+\end_layout
+
+\end_body
+\end_document

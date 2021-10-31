@@ -1,0 +1,19 @@
+{
+    "python.pythonPath": "/Users/Theo/miniconda3/envs/kruiszwin/bin/python",
+    "workbench.settings.editor": "json",
+    "workbench.settings.openDefaultSettings": true,
+    "workbench.settings.useSplitJSON": true,
+    "kite.loggingLevel": "error",
+    "debug.showBreakpointsInOverviewRuler": true,
+    "jupyter.sendSelectionToInteractiveWindow": true,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
+    "python.analysis.extraPaths": ["/Users/Theo/GRWMODELS/python/tools/"]
+}
