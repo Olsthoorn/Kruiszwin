@@ -2001,7 +2001,7 @@ if __name__ == '__main__':
 
     # Get the data from a cross section
     dirs = Dir_struct(home=home, case_folder='Kruiszwin_1',
-        executables={'mflow':'mf2005.mac', 'mt3d': 'mt3dms5b.mac', 'seawat':'swt_v4.mac'})
+        executables={'mflow':'mf2005bigsur.mac', 'mt3d': 'mt3dms5b.mac', 'seawat':'swt_v4.mac'})
 
     workbook   = os.path.join(dirs.data, "Julianadorp.xlsx")
     layers_df  = pd.read_excel(workbook, sheet_name='Boringen', engine="openpyxl")
@@ -2245,7 +2245,7 @@ if __name__ == '__main__':
         showpar(par_mf['lpf'], 'sy', **kw)
 
 
-    if False: # skip modflow and mt3d
+    if True: # skip modflow and mt3d
         #%% MODFLOW
         model = modflow(dirs=dirs, case=case_mf, par=par_mf, bdd=bdd)
 
@@ -2393,69 +2393,69 @@ if __name__ == '__main__':
 
     #%% ==== SEAWAT ===========================================================
 
-
-    par_mt3d = get_mt3d_parameters(workbook_name=workbook, sheet_name='MT3D',
-                                layers=borehole[use_name].layers,
-                                new_layers=None,
-                                trench=use_trench,
-                                ibound=par_mf['bas']['ibound'],
-                                tds_profile=tds_profiles[use_name],
-                                gr=gr)
-
-
-    seawat(dirs=dirs, case=case_sw, par_mf=par_mf, par_mt=par_mt3d, bdd=None )
+    if False:
+        par_mt3d = get_mt3d_parameters(workbook_name=workbook, sheet_name='MT3D',
+                                    layers=borehole[use_name].layers,
+                                    new_layers=None,
+                                    trench=use_trench,
+                                    ibound=par_mf['bas']['ibound'],
+                                    tds_profile=tds_profiles[use_name],
+                                    gr=gr)
 
 
-    it = par_mf['dis']['nper'] - 1
-    xlim = gr.x[1], gr.x[-2]
-
-    ucn = UCN_obj(dirs, gr=gr)
-
-    axs = newfig2h(["Totaal zout conentraties {} voor t = {:.0f} d, sleuf_nr {}".format(use_name, ucn.times[-1], itr),
-                       "Totaal zout concentratie [mg/L] onder en naast de sleuf"],
-                       ["x [m]", "TDS [mg/L]"],
-                       ["NAP [m]", "NAP [m]"], size_inches=(16, 8), shift_fraction=0.4)
+        seawat(dirs=dirs, case=case_sw, par_mf=par_mf, par_mt=par_mt3d, bdd=None )
 
 
+        it = par_mf['dis']['nper'] - 1
+        xlim = gr.x[1], gr.x[-2]
 
-    plot_section(boring=borehole[use_name], trench=trenches.trenches[itr],
-                     xlim=gr.x[[0, -1]], ylim=(-16, 2), ax=axs[0], trenchcolor='white')
+        ucn = UCN_obj(dirs, gr=gr)
 
-
-    hds.plot_water_table(it=it, gr=gr, ax=axs[0])
-
-    clevels =[500, 1000, 2000, 4000, 8000, 16000, 24000, 32000]
-
-    Cs = ucn.contour(it=it, gr=gr, ax=axs[0], levels=clevels, linewidths=1., colors='darkred', zorder=3)
-    ax.clabel(Cs, clevels, inline=True, fmt='%.0f', fontsize=10)
-
-    axs[0].set_xlim(-100, 100)
-
-    # Zoutprofiel onder en naast de sleuf
-
-    tds_profiles[use_name].plot(ax=ax)
-    for ix in [80, 136]:
-        axs[1].plot(ucn.conc[-1, :, 0, ix], gr.ZM[:, 0, ix], label=f"tds x={gr.xm[ix]:.0f} m")
-
-    axs[1].legend()
+        axs = newfig2h(["Totaal zout conentraties {} voor t = {:.0f} d, sleuf_nr {}".format(use_name, ucn.times[-1], itr),
+                        "Totaal zout concentratie [mg/L] onder en naast de sleuf"],
+                        ["x [m]", "TDS [mg/L]"],
+                        ["NAP [m]", "NAP [m]"], size_inches=(16, 8), shift_fraction=0.4)
 
 
-    #%% Comparing confined and unconfined 1D flow
 
-    ax = newfig("Vergelijk freatisch - gespannen", "x [m]", "h [m]")
+        plot_section(boring=borehole[use_name], trench=trenches.trenches[itr],
+                        xlim=gr.x[[0, -1]], ylim=(-16, 2), ax=axs[0], trenchcolor='white')
 
-    b, k, n, D = 80, 5, 0.0005, 1/2.5
 
-    x = np.linspace(0, b, 50)
+        hds.plot_water_table(it=it, gr=gr, ax=axs[0])
 
-    h = np.sqrt(n / k * (b ** 2 - x ** 2))
-    phi = n / (2 * k * D) * (b ** 2 - x ** 2)
+        clevels =[500, 1000, 2000, 4000, 8000, 16000, 24000, 32000]
 
-    ax.plot(x, h, label='freatisch')
-    ax.plot(x, phi, label='gespannen')
-    ax.plot(x, D * np.ones_like(x), label='D')
-    ax.legend()
-    print("h[0] = {:.2f}, phi[0]= {:.2f}, h[0] / phi[0] = {:.2f}".format(h[0], phi[0], h[0]/phi[0]))
+        Cs = ucn.contour(it=it, gr=gr, ax=axs[0], levels=clevels, linewidths=1., colors='darkred', zorder=3)
+        ax.clabel(Cs, clevels, inline=True, fmt='%.0f', fontsize=10)
+
+        axs[0].set_xlim(-100, 100)
+
+        # Zoutprofiel onder en naast de sleuf
+
+        tds_profiles[use_name].plot(ax=ax)
+        for ix in [80, 136]:
+            axs[1].plot(ucn.conc[-1, :, 0, ix], gr.ZM[:, 0, ix], label=f"tds x={gr.xm[ix]:.0f} m")
+
+        axs[1].legend()
+
+
+        #%% Comparing confined and unconfined 1D flow
+
+        ax = newfig("Vergelijk freatisch - gespannen", "x [m]", "h [m]")
+
+        b, k, n, D = 80, 5, 0.0005, 1/2.5
+
+        x = np.linspace(0, b, 50)
+
+        h = np.sqrt(n / k * (b ** 2 - x ** 2))
+        phi = n / (2 * k * D) * (b ** 2 - x ** 2)
+
+        ax.plot(x, h, label='freatisch')
+        ax.plot(x, phi, label='gespannen')
+        ax.plot(x, D * np.ones_like(x), label='D')
+        ax.legend()
+        print("h[0] = {:.2f}, phi[0]= {:.2f}, h[0] / phi[0] = {:.2f}".format(h[0], phi[0], h[0]/phi[0]))
 
 
 # %%
