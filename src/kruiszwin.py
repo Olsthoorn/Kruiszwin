@@ -2001,7 +2001,7 @@ if __name__ == '__main__':
 
     # Get the data from a cross section
     dirs = Dir_struct(home=home, case_folder='Kruiszwin_1',
-        executables={'mflow':'mf2005bigsur.mac', 'mt3d': 'mt3dms5b.mac', 'seawat':'swt_v4.mac'})
+        executables={'mflow':'mf2005.mac', 'mt3d': 'mt3dms5b.mac', 'seawat':'swt_v4.mac'})
 
     workbook   = os.path.join(dirs.data, "Julianadorp.xlsx")
     layers_df  = pd.read_excel(workbook, sheet_name='Boringen', engine="openpyxl")
@@ -2138,7 +2138,8 @@ if __name__ == '__main__':
     case_mt = 'justMT3d'
     case_sw = 'justSeawat'
 
-    run_seawat = False
+    run_seawat = True
+    run_modflow = False
 
     # Generate the collection of trenches
     trenches = Trench_collection(os.path.join(GIS, 'punten.shp'),
@@ -2245,7 +2246,7 @@ if __name__ == '__main__':
         showpar(par_mf['lpf'], 'sy', **kw)
 
 
-    if True: # skip modflow and mt3d
+    if run_modflow: # skip modflow and mt3d
         #%% MODFLOW
         model = modflow(dirs=dirs, case=case_mf, par=par_mf, bdd=bdd)
 
@@ -2393,7 +2394,7 @@ if __name__ == '__main__':
 
     #%% ==== SEAWAT ===========================================================
 
-    if False:
+    if run_seawat:
         par_mt3d = get_mt3d_parameters(workbook_name=workbook, sheet_name='MT3D',
                                     layers=borehole[use_name].layers,
                                     new_layers=None,
